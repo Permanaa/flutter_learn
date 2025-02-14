@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn/models/category_model.dart';
 import 'package:flutter_learn/models/diet_model.dart';
 import 'package:flutter_learn/models/popular_model.dart';
+import 'package:flutter_learn/pages/detail.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           searchField(),
           SizedBox(
-            height: 40,
+            height: 25,
           ),
           categorySection(),
           SizedBox(
@@ -153,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         children: [
                           Text(
-                            categories[index].name,
+                            diets[index].name,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black,
@@ -169,7 +170,12 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                    diet: diets[index],
+                                  )));
+                        },
                         child: Container(
                           height: 45,
                           width: 130,
@@ -256,11 +262,11 @@ class _HomePageState extends State<HomePage> {
 
   Container searchField() {
     return Container(
-      margin: EdgeInsets.only(top: 40, left: 20, right: 20),
+      margin: EdgeInsets.only(top: 20, left: 12, right: 12),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             color: Color(0xFF1D1617).withAlpha(20),
-            blurRadius: 40,
+            blurRadius: 20,
             spreadRadius: 0.0)
       ]),
       child: TextField(
@@ -308,23 +314,8 @@ class _HomePageState extends State<HomePage> {
         style: TextStyle(
             color: Colors.amber, fontSize: 18, fontWeight: FontWeight.bold),
       ),
+      scrolledUnderElevation: 0,
       backgroundColor: Colors.white,
-      centerTitle: true,
-      leading: GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: Color(0xFFF7F8F8),
-              borderRadius: BorderRadius.circular(10)),
-          child: SvgPicture.asset(
-            'assets/icons/arrow-left.svg',
-            height: 20,
-            width: 20,
-          ),
-        ),
-      ),
       actions: [
         GestureDetector(
           onTap: () {},
