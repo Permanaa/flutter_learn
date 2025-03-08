@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   List<DietModel> diets = [];
   List<PopularDietsModel> popularDiets = [];
 
+  int currentPageIndex = 0;
+
   void _getInitialInfo() {
     categories = CategoryModel.getCategories();
     diets = DietModel.getDiets();
@@ -29,6 +31,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBar(),
+      bottomNavigationBar: NavigationBar(
+          backgroundColor: Colors.amber[50],
+          indicatorColor: Colors.amber,
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          destinations: [
+            NavigationDestination(
+                icon: Icon(Icons.home),
+                selectedIcon: Icon(
+                  Icons.home,
+                  color: Colors.amber[50],
+                ),
+                label: 'Home'),
+            NavigationDestination(
+                icon: Icon(Icons.person),
+                selectedIcon: Icon(
+                  Icons.person,
+                  color: Colors.amber[50],
+                ),
+                label: 'Profile'),
+          ]),
       body: ListView(
         children: [
           searchField(),
